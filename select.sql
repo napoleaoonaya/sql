@@ -9,6 +9,15 @@ create table produtos(
     primary key(n_id)
 )engine = InnoDB charset=latin1;
 
+
+create table vendedor(
+		n_id bigint not null auto_increment,
+        c_nomevendedor varchar(255) not null,
+        n_vendedor_produto bigint not null,
+        primary key(n_id),
+        constraint foreign key(n_vendedor_produto) references produtos (n_id)
+)engine = InnoDB charset=latin1;
+
 insert into produtos (c_nomeproduto,n_precoproduto) values ("Bike Caloi",1200);
 insert into produtos (c_nomeproduto,n_precoproduto) values ("Bike Caloi",1200);
 insert into produtos (c_nomeproduto,n_precoproduto) values ("Bike Caloi",1200);
@@ -26,6 +35,10 @@ insert into produtos (c_nomeproduto,n_precoproduto) values ("XBox One",2300);
 insert into produtos (c_nomeproduto,n_precoproduto) values ("Computador",2700);
 insert into produtos (c_nomeproduto,n_precoproduto) values ("Notebook",3200);
 insert into produtos (c_nomeproduto,n_precoproduto) values ("Lego",200);
+
+insert into vendedor (c_nomevendedor,n_vendedor_produto) values("napoleão",1);
+insert into vendedor (c_nomevendedor,n_vendedor_produto) values("atila",2);
+insert into vendedor (c_nomevendedor,n_vendedor_produto) values("daniel",3);
 
 select *from produtos;
 
@@ -88,3 +101,16 @@ select 'nome','preco' union all select c_nomeproduto,n_precoproduto from produto
     enclosed by '"'
     escaped by ','
     lines terminated by '\r\n';
+
+select 'nome','preco','vendedor' union all select c_nomeproduto,n_precoproduto,c_nomevendedor from produtos as p  
+	inner join vendedor as v 
+	where p.n_id = v.n_id and n_precoproduto > 1000 
+	into outfile '/var/lib/mysql-files/produtos5.csv'
+    character set utf8
+    fields terminated by ','
+    enclosed by '"'
+    escaped by ','
+    lines terminated by '\r\n';    
+    
+    
+    
