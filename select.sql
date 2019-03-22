@@ -60,11 +60,8 @@ select c_nomeproduto, count(*) as Quantidade from produtos group by c_nomeprodut
 -- ver o diretorio aonde tem permissão de salvar --
 show variables like 'secure_file_priv';
 
--- /var/lib/mysqlfiles/ --
+-- /var/lib/mysql-files/ --
 
-use onaya;
-
-select *from produtos;
 
 -- export com select em csv ou txt --
 select 'id','nome','preço' union all select n_id,c_nomeproduto,n_precoproduto from produtos
