@@ -109,5 +109,11 @@ select 'nome','preco','vendedor' union all select c_nomeproduto,n_precoproduto,c
     escaped by ','
     lines terminated by '\r\n';    
     
+
+xml
+select concat('<id>',id,'</id><nome>',nome,
+'</nome>') from funcionario;
+   
+    
     
     
